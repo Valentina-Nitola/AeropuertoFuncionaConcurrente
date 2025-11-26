@@ -1,12 +1,9 @@
-import scala.collection.parallel.CollectionConverters._
-import scala.collection.parallel.ParSeq
 package object Datos {
   case class Aeropuerto(Cod: String, X: Int, Y: Int, GMT: Int)
 
   case class Vuelo(Aln: String, Num: Int, Org: String, HS: Int, MS: Int, Dst: String, HL: Int, ML: Int, Esc: Int)
 
   type Itinerario = List[Vuelo]
-  type ItinerarioPar = ParSeq[Vuelo]
 
   val aeropuertosCurso = List(
 
