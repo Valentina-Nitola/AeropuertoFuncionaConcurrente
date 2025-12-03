@@ -53,8 +53,8 @@ val itsa4 = itsAireCurso ( "CLO","MEX" )
 val itsa5 = itsAireCurso ("CTG","PTY")*/
 
 
-val itSalidaCurso= itinerarioSalida(vuelosCurso, aeropuertosCurso)
+/*val itSalidaCurso= itinerarioSalida(vuelosCurso, aeropuertosCurso)
 
 val itsal1= itSalidaCurso("CTG","PTY",11,40)
 val itsal2= itSalidaCurso("CTG","PTY",11,55)
-val itsal3 = itSalidaCurso("CTG","PTY",10,30)
+val itsal3 = itSalidaCurso("CTG","PTY",10,30)*/

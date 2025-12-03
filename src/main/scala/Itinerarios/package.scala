@@ -78,6 +78,44 @@ package object Itinerarios {
   }
 
   // --------------------------------------------------
+  // Conversiones y helpers públicos solicitados
+  // --------------------------------------------------
+
+  /** Convierte una cantidad de minutos a (horas, minutos) */
+  def minutosAhoras(min: Int): (Int, Int) = {
+    val h = min / 60
+    val m = min % 60
+    (h, m)
+  }
+
+  /** Duración real de un vuelo (public wrapper) */
+  def tiempoDeVuelo(mapaAer: List[Aeropuerto])(vuelo: Vuelo): Int = {
+    val mapa = mapaAer.map(a => a.Cod -> a).toMap
+    duracionVueloMin(vuelo, mapa) // ya calcula correctamente con GMT
+  }
+
+  /** Tiempo total de vuelo (solo aire) de un itinerario */
+  def tiempoEnAireIt(mapaAer: List[Aeropuerto])(it: Itinerario): Int = {
+    val mapa = mapaAer.map(a => a.Cod -> a).toMap
+    it.map(v => duracionVueloMin(v, mapa)).sum
+  }
+
+  /** Tiempo total incluyendo vuelos y esperas entre conexiones */
+  def tiempoDeVueloIt(mapaAer: List[Aeropuerto])(it: Itinerario): Int = {
+    val mapa = mapaAer.map(a => a.Cod -> a).toMap
+
+    val aire = it.map(v => duracionVueloMin(v, mapa)).sum
+
+    val esperas =
+      it.zip(it.drop(1))
+        .map { case (v1, v2) => esperaEntre(v1, v2, mapa) }
+        .sum
+
+    aire + esperas
+  }
+
+
+  // --------------------------------------------------
   // itinerariosTiempo
   // --------------------------------------------------
 
